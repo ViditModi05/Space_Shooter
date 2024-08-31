@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private GameObject player;
     private Rigidbody rb;
     [Header("Settings")]
     [SerializeField] private float moveSpeed;
@@ -17,11 +18,16 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        direction = Input.GetAxisRaw("Horizontal"); //Returning the horizontal input recieved from the player
-        rb.velocity = new Vector3(direction * moveSpeed,0,0); //moving the player in the x axis
+      if(player == null)
+      {
+        return;
+      }
+      
+      direction = Input.GetAxisRaw("Horizontal"); //Returning the horizontal input recieved from the player
+      rb.velocity = new Vector3(direction * moveSpeed,0,0); //moving the player in the x axis
     }
     void Update()
     {
-        
+       
     }
 }

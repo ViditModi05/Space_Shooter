@@ -12,7 +12,7 @@ public class PlayerBullet : MonoBehaviour
     
     private void Awake()
     {
-        Destroy(gameObject,2F); 
+        Destroy(gameObject,3F); 
     }
     void Start()
     {

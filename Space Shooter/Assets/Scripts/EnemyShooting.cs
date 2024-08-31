@@ -12,13 +12,15 @@ public class EnemyShooting : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Settings")]
-    [SerializeField] private float attackTimer;
-    private bool canShoot = true;
+    //[SerializeField] private float attackTimer;
+    [SerializeField] private float minTime;
+    [SerializeField] private float maxTime;
+    //private bool canShoot = true;
 
 
     void Start()
     {
-
+        StartCoroutine(Shoot());
     }
 
     // Update is called once per frame
@@ -29,22 +31,22 @@ public class EnemyShooting : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(canShoot == true)
-        {
-            SpawnBullet(); //Calling the SpawnBullet function if the player can shoot at fixed intervals
-        }
+        
     }
 
     private void SpawnBullet()
     {
         Instantiate(bullet, firePos.position, firePos.rotation); //Spawning the bullet
-        StartCoroutine(AttackDelay());
+        
     }
 
-    IEnumerator AttackDelay()  //Creatng a Coroutine to add delay between shots
+    IEnumerator Shoot()  //Creatng a Coroutine to add delay between shots
     {
-        canShoot = false;
-        yield return new WaitForSeconds(attackTimer); //Waiting for the attack timer to finish
-        canShoot = true;
+        while(true)
+        {
+           yield return new WaitForSeconds(Random.Range(minTime, maxTime)); //Waiting a random amount of time
+           SpawnBullet(); //Calling the SpawnBullet function at random intervals
+        } 
+        
     }
 }
