@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [Header("Refernces")]
-    //[SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject player;
     private Rigidbody rb;
 
     [Header("Settings")]
@@ -20,6 +20,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player == null)
+        {
+            return;
+        }
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
     }
 

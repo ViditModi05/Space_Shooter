@@ -20,16 +20,19 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && canShoot)
+        if(!PauseMenu.instance.isPaused)
         {
-            Shoot();  //Calling the shoot function if the left MB is down and the player can shoot
+          if(Input.GetMouseButtonDown(0) && canShoot)
+          {
+             Shoot();  //Calling the shoot function if the left MB is down and the player can shoot
+          }
         }
-        
     }
 
     private void Shoot()
     {
         Instantiate(bullet, firePos.position, firePos.rotation); //Creating the bullet at the fire pos
+        AudioManager.instance.PlaySound(2);
         StartCoroutine(AttackDelay());
     }
 

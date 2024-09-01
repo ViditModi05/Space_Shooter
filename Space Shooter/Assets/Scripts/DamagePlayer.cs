@@ -16,11 +16,13 @@ public class DamagePlayer : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player")
         {
             PlayerHealth.instance.Damage();
+            AudioManager.instance.PlaySound(3);
+            Destroy(gameObject);
         }
     }
 }

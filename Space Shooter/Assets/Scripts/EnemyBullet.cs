@@ -13,7 +13,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Awake()
     {
-        Destroy(gameObject,4F); 
+        Destroy(gameObject,6F); 
     }
     
     void Start()
@@ -27,5 +27,10 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }

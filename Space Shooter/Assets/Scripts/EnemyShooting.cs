@@ -37,6 +37,7 @@ public class EnemyShooting : MonoBehaviour
     private void SpawnBullet()
     {
         Instantiate(bullet, firePos.position, firePos.rotation); //Spawning the bullet
+        AudioManager.instance.PlaySound(0);
         
     }
 

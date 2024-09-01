@@ -6,13 +6,14 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private GameObject impactEffect;
     private Rigidbody rb; 
     [Header("Settings")]
     [SerializeField] private float bulletSpeed;
     
     private void Awake()
     {
-        Destroy(gameObject,3F); 
+        Destroy(gameObject,5F); 
     }
     void Start()
     {
@@ -30,10 +31,18 @@ public class PlayerBullet : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
+            AudioManager.instance.PlaySound(1);
+            Instantiate(impactEffect, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
 
         //Destroying the enemny if on collision the enemy haas the tag "Enemy" also destroying the bullet
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }
+
